@@ -3,11 +3,12 @@
  */
 class Store {
   numberItem = 0;
+  wasCodes;
 
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
-    this.numberItem = this.state.list.length;
+    this.wasCodes = initState.list.map((item) => item.code);
   }
 
   /**
@@ -45,9 +46,13 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    do {
+      this.numberItem++;
+    } while (this.wasCodes.includes(this.numberItem))
+
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: ++this.numberItem, title: 'Новая запись', sumSelected: 0 }],
+      list: [...this.state.list, { code: this.numberItem, title: 'Новая запись', sumSelected: 0, wordSelected: 'раз'}],
     });
   }
 
@@ -74,6 +79,13 @@ class Store {
           item.selected = !item.selected;
           if (item.selected) {
             item.sumSelected++;
+            if (item.sumSelected % 10 >= 2 && item.sumSelected % 10 <= 4 && item.sumSelected % 100 != 12
+              && item.sumSelected % 100 != 13 && item.sumSelected % 100 != 14) {
+              item.wordSelected = 'раза';
+            }
+            else {
+              item.wordSelected = 'раз';
+            }
           }
         }
         else {
