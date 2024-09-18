@@ -1,0 +1,18 @@
+.Result-basket {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.Result-basket-text {
+  font-weight: bold;
+  padding: 20px 5px 20px 20px;
+}
+
+.Result-basket-price {
+  font-weight: bold;
+  padding: 20px 160px 20px 5px;
+}
+
+

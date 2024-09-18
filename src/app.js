@@ -1,8 +1,6 @@
-import React, { useCallback } from 'react';
-import List from './components/list';
-import Controls from './components/controls';
-import Head from './components/head';
-import PageLayout from './components/page-layout';
+import React, { useCallback, useState} from 'react';
+import Shop from './components/components-shop/shop'
+import Basket from './components/components-basket/basket';
 
 /**
  * Приложение
@@ -11,6 +9,10 @@ import PageLayout from './components/page-layout';
  */
 function App({ store }) {
   const list = store.getState().list;
+  const countSum = store.getState().countSum;
+  const priceSum = store.getState().priceSum;
+
+  const [isBasket, setBasket] = useState(false);
 
   const callbacks = {
     onDeleteItem: useCallback(
@@ -33,15 +35,12 @@ function App({ store }) {
   };
 
   return (
-    <PageLayout>
-      <Head title="Приложение на чистом JS" />
-      <Controls onAdd={callbacks.onAddItem} />
-      <List
-        list={list}
-        onDeleteItem={callbacks.onDeleteItem}
-        onSelectItem={callbacks.onSelectItem}
-      />
-    </PageLayout>
+    <>
+    <Shop setBasket={setBasket} list={list} onSelectItem={callbacks.onSelectItem} countSum={countSum} 
+    priceSum = {priceSum}/>
+    <Basket isBasket={isBasket} setBasket={setBasket} onDeleteItem={callbacks.onDeleteItem} 
+    list={list} price = {priceSum}/>
+    </>
   );
 }
 

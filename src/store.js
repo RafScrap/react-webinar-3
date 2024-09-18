@@ -1,5 +1,3 @@
-import { generateCode } from './utils';
-
 /**
  * Хранилище состояния приложения
  */
@@ -41,25 +39,33 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
-   */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
-    });
-  }
-
-  /**
    * Удаление записи по коду
    * @param code
    */
   deleteItem(code) {
+    let sumCode = 0;
+    let priceCode = 0;
     this.setState({
       ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code),
+      list: this.state.list.map(item => {
+        if (item.code === code) {
+          // Смена выделения и подсчёт
+          sumCode = item.count;
+          priceCode = item.price;
+          return {
+            ...item,
+            count: 0,
+          };
+        }
+        // Сброс выделения если выделена
+        return item;
+      }),
     });
+    this.setState({
+      ...this.state,
+      countSum: this.state.countSum - sumCode,
+      priceSum: this.state.priceSum - sumCode * priceCode
+    })
   }
 
   /**
@@ -67,20 +73,26 @@ class Store {
    * @param code
    */
   selectItem(code) {
+    let priceCode = 0;
     this.setState({
       ...this.state,
+      countSum: this.state.countSum + 1,
       list: this.state.list.map(item => {
         if (item.code === code) {
           // Смена выделения и подсчёт
+          priceCode = item.price;
           return {
             ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
+            count: item.count + 1,
           };
         }
         // Сброс выделения если выделена
-        return item.selected ? { ...item, selected: false } : item;
+        return item;
       }),
+    });
+    this.setState({
+      ...this.state,
+      priceSum: this.state.priceSum + priceCode
     });
   }
 }

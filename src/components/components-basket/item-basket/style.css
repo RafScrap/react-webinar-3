@@ -1,0 +1,32 @@
+.Item-basket {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px dashed #ccc;
+}
+
+.Item-basket-code {
+  padding: 20px 10px 20px 20px;
+}
+
+.Item-basket-title {
+  width: 100%;
+  padding: 20px 10px;
+}
+
+.Item-basket-price {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 2px 20px 10px;
+}
+
+.Item-basket-currency {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 20px 20px 2px;
+}
+
+.Item-basket-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 20px 20px 10px;
+}
