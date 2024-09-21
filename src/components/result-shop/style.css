@@ -1,0 +1,16 @@
+.Result-shop {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .Result-shop-text {
+    margin: 0 auto;
+  }
+  
+  .Result-shop-result {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    gap: 5px;
+  }

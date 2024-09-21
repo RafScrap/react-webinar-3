@@ -1,0 +1,15 @@
+.Button-basket {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Button-basket-button.shop {
+    width: 80px;
+}
+
+.Button-basket-button.basket {
+    width: 80px;
+    height: 20px;
+    position:relative;
+    top: 40%;
+}

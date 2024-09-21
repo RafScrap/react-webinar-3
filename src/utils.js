@@ -15,6 +15,12 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
   // Возвращаем вариант по ключу, если он есть
   return variants[key] || '';
 }
+
+export function addCurrency(currency = '', sum) {
+  return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: currency }).format(
+    sum,
+  )
+}
 /**
  * Генератор чисел с шагом 1
  * Вариант с замыканием на начальное значение в самовызываемой функции.

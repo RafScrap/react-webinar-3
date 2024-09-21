@@ -1,6 +1,6 @@
 import React, { useCallback, useState} from 'react';
-import Shop from './components/components-shop/shop'
-import Basket from './components/components-basket/basket';
+import Shop from './components/shop'
+import ModalWindow from './components/modal-window';
 
 /**
  * Приложение
@@ -9,8 +9,8 @@ import Basket from './components/components-basket/basket';
  */
 function App({ store }) {
   const list = store.getState().list;
-  const countSum = store.getState().countSum;
-  const priceSum = store.getState().priceSum;
+  const countUnique = store.getState().countUnique;
+  const sum = store.getState().sum;
 
   const [isBasket, setBasket] = useState(false);
 
@@ -36,10 +36,10 @@ function App({ store }) {
 
   return (
     <>
-    <Shop setBasket={setBasket} list={list} onSelectItem={callbacks.onSelectItem} countSum={countSum} 
-    priceSum = {priceSum}/>
-    <Basket isBasket={isBasket} setBasket={setBasket} onDeleteItem={callbacks.onDeleteItem} 
-    list={list} price = {priceSum}/>
+    <Shop setBasket={setBasket} list={list} onSelectItem={callbacks.onSelectItem} countUnique={countUnique} 
+    sum = {sum} nameClass={'shop'}/>
+    <ModalWindow setBasket={setBasket} list={list} onDeleteItem={callbacks.onDeleteItem} 
+    sum = {sum} nameClass={'basket'} isBasket={isBasket} countUnique={countUnique}/>
     </>
   );
 }

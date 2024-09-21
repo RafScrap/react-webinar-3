@@ -1,0 +1,7 @@
+.Result-basket {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 110px;
+  gap: 20px;
+  font-weight: bold;
+}
