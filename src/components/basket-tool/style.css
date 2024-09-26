@@ -7,9 +7,20 @@
 }
 
 .BasketTool-label {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
+}
+
+.BasketTool-return {
+  background-color: white;
+  border: 0px;
+  color: blue;
+  text-decoration: underline;
+  font-size: 18px;
 }

@@ -5,6 +5,7 @@ import ModalLayout from '../../components/modal-layout';
 import BasketTotal from '../../components/basket-total';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
+import {useNavigate} from "react-router-dom";
 
 function Basket() {
   const store = useStore();
@@ -15,17 +16,21 @@ function Basket() {
     sum: state.basket.sum,
   }));
 
+  const nav = useNavigate();
+
   const callbacks = {
     // Удаление из корзины
     removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
+
+    chooseProduct: (id) => {store.actions.product.load(id).then(() => nav(`/${id}`))}
   };
 
   const renders = {
     itemBasket: useCallback(
       item => {
-        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} />;
+        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} chooseProduct={callbacks.chooseProduct}/>;
       },
       [callbacks.removeFromBasket],
     ),

@@ -1,0 +1,31 @@
+.Catalog-navigation {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 25px;
+  padding-right: 20px;
+}
+
+.Catalog-navigation-unselected {
+  background-color: white;
+  border: 0;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+}
+
+.Catalog-navigation-selected {
+  background-color: rgb(0, 115, 255);
+  color:white;
+  border: 0;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+}
+
+.Catalog-navigation-unselected:hover {
+  background-color: lightgray;
+}
+
+.Catalog-navigation-text {
+  padding-top: 5px;
+}

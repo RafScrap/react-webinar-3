@@ -1,0 +1,30 @@
+
+.Product-info-block {
+  display: flex;
+  padding: 10px 40px;
+  gap: 5px;
+  font-size: 18px;
+  line-height: 25px
+}
+
+.Product-info-description {
+  padding: 30px 40px 10px 40px;
+  font-size: 18px;
+  line-height: 25px
+}
+
+.Product-value {
+  font-weight: bold;
+}
+
+.Product-price {
+  padding: 0px 40px 20px 40px;
+  font-weight: bold;
+  font-size: 24px;
+  gap: 5px;
+}
+
+.Product-add {
+  margin: 0px 40px;
+}
+
