@@ -14,11 +14,12 @@ class Basket extends StoreModule {
    * @param _id Код товара
    */
   addToBasket(_id) {
-    console.log('basket_id_inner', _id)
+    console.log('basket_id_inner0', _id)
     let sum = 0;
     // Ищем товар в корзине, чтобы увеличить его количество
     let exist = false;
     const list = this.getState().list.map(item => {
+      console.log('item', item)
       let result = item;
       if (item._id === _id) {
         exist = true; // Запомним, что был найден в корзине

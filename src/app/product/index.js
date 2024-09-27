@@ -1,58 +1,51 @@
-import { memo } from 'react';
+import { memo, useEffect, useCallback } from 'react';
+import {useParams} from "react-router";
+import useStore from '../../store/use-store';
+import useSelector from '../../store/use-selector';
+import {useNavigate} from "react-router-dom";
 import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
-import {useParams} from "react-router";
+import ProductInfo from '../../components/product-info';
 import BasketTool from '../../components/basket-tool';
 import './style.css'
-import PropTypes from 'prop-types';
 
-function Product(props) {
+function Product() {
 
-  const id = useParams().id;
+  const store = useStore();
+
+  const idProduct = useParams().id;
 
   const callbacks = {
-    onAdd: () => props.onAdd(id),
-    getProduct: () => props.getProduct(),
-    openModalBasket: () => props.openModalBasket(),
-    returnMain: () => props.returnMain(),
+    // Добавление в корзину
+    addToBasket: useCallback(() => store.actions.basket.addToBasket(idProduct), [store]),
+    // Открытие модалки корзины
+    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    returnMain: useCallback(() => nav(`/`), [store]),
   };
 
-  const item = callbacks.getProduct().information;
-  console.log('itemP', item);
+  useEffect(() => {
+    console.log('useEffect')
+    store.actions.product.load(idProduct);
+  }, [idProduct]);
+
+  const nav = useNavigate();
+
+  const select = useSelector(state => ({
+    amount: state.basket.amount,
+    sum: state.basket.sum,
+    info: state.product.information,
+    madeIn: state.product.madeIn,
+    category: state.product.category
+  }));
 
   return (
     <PageLayout>
-      <Head title={item.title} />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={props.amount} sum={props.sum} returnMain={callbacks.returnMain}/>
-      <div className='Product-info'>
-        <div className='Product-info-description'>{item.description}</div>
-        <div className='Product-info-block'>
-          <div className='Product-key'>Страна-производитель:</div>
-          <div className='Product-value'>{`${item.madeIn.title} (${item.madeIn.code})`}</div>
-        </div>
-        <div className='Product-info-block'>
-          <div className='Product-key'>Категория: </div>
-          <div className='Product-value'>{item.category.title}</div>
-        </div>
-        <div className='Product-info-block'>
-        <div className='Product-key'>Год выпуска: </div>
-          <div className='Product-value'>{item.edition}</div>
-        </div>
-        <div className='Product-info-block'></div>
-        <div className='Product-price'>Цена: {item.price} ₽</div>
-        <button className='Product-add' onClick={callbacks.onAdd}>Добавить</button>
-      </div>
+      <Head title={select.info.title} />
+      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} returnMain={callbacks.returnMain}/>
+      <ProductInfo info={select.info} madeIn={select.madeIn} category={select.category}/>
+      <button className='Product-add' onClick={callbacks.addToBasket}>Добавить</button>
     </PageLayout>
   );
 }
-
-Product.propTypes = {
-  sum: PropTypes.number,
-  amount: PropTypes.number,
-  onAdd: PropTypes.func.isRequired,
-  getProduct: PropTypes.func.isRequired,
-  openModalBasket: PropTypes.func.isRequired,
-  returnMain: PropTypes.func.isRequired,
-};
 
 export default memo(Product);

@@ -8,6 +8,8 @@ class Product extends StoreModule {
   initState() {
     return {
         information: {},
+        madeIn: {},
+        category: {}
     };
   }
 
@@ -18,6 +20,8 @@ class Product extends StoreModule {
       {
         ...this.getState(),
         information: json.result,
+        madeIn: json.result.madeIn,
+        category: json.result.category
       },
       'Загружен товар',
     );

@@ -24,7 +24,10 @@ function Basket() {
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
 
-    chooseProduct: (id) => {store.actions.product.load(id).then(() => nav(`/${id}`))}
+    chooseProduct: useCallback((id) => {
+      store.actions.modals.close();
+      nav(`/articles/${id}`)
+    }, [store])  
   };
 
   const renders = {
