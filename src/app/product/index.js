@@ -7,6 +7,8 @@ import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
 import ProductInfo from '../../components/product-info';
 import BasketTool from '../../components/basket-tool';
+import MenuTool from '../../components/menu-tool';
+import Tool from '../../components/tool';
 import './style.css'
 
 function Product() {
@@ -17,14 +19,15 @@ function Product() {
 
   const callbacks = {
     // Добавление в корзину
-    addToBasket: useCallback(() => store.actions.basket.addToBasket(idProduct), [store]),
+    addToBasket: useCallback(() => {
+      store.actions.basket.addToBasket(idProduct)
+    }, [idProduct]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     returnMain: useCallback(() => nav(`/`), [store]),
   };
 
   useEffect(() => {
-    console.log('useEffect')
     store.actions.product.load(idProduct);
   }, [idProduct]);
 
@@ -41,7 +44,10 @@ function Product() {
   return (
     <PageLayout>
       <Head title={select.info.title} />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} returnMain={callbacks.returnMain}/>
+      <Tool>
+        <MenuTool title="Главная" returnMain={callbacks.returnMain}/>
+        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} returnMain={callbacks.returnMain}/>
+      </Tool>
       <ProductInfo info={select.info} madeIn={select.madeIn} category={select.category}/>
       <button className='Product-add' onClick={callbacks.addToBasket}>Добавить</button>
     </PageLayout>

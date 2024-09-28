@@ -14,7 +14,6 @@ function Item(props) {
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')} onClick={callbacks.onChooseProduct}>{props.item.title}</div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>

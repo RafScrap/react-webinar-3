@@ -4,12 +4,7 @@
   justify-content: flex-end;
   padding: 20px;
   font-size: 18px;
-}
-
-.BasketTool-text {
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .BasketTool-label {
@@ -20,15 +15,6 @@
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
-}
-
-.BasketTool-return {
-  background-color: white;
-  border: 0px;
-  color: blue;
-  text-decoration: underline;
-  font-size: 18px;
-  cursor: pointer;
 }
 
 .BasketTool-open {

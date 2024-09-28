@@ -8,6 +8,8 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import CatalogNavigation from '../../components/calatog-navigation';
 import {useNavigate} from "react-router-dom";
+import MenuTool from '../../components/menu-tool';
+import Tool from '../../components/tool';
 
 function Main() {
   const store = useStore();
@@ -52,7 +54,10 @@ function Main() {
   return (
     <PageLayout>
       <Head title="Магазин" />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} returnMain={callbacks.returnMain}/>
+      <Tool>
+        <MenuTool title="Главная" returnMain={callbacks.returnMain}/>
+        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} returnMain={callbacks.returnMain}/>
+      </Tool>
       <List list={select.list} renderItem={renders.item} />
       <CatalogNavigation moveList={callbacks.moveList} page={select.page} countPages={select.countPages}/>
     </PageLayout>
